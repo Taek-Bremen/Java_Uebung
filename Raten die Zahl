@@ -1,0 +1,45 @@
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Main {
+
+    public static Integer geheimnis = ThreadLocalRandom.current().nextInt(1, 100);;
+
+    public static void main(String[] args) throws Exception {
+        System.out.println("vermutet die Zahl!");
+        Scanner tnum = new Scanner(System.in);
+        int Versuch = 0; //Versuch++;
+        while (true) {
+            int num = tnum.nextInt();
+            String result = guess(num);
+            Versuch = Versuch + 1;
+            if (result.equals("Erfolg")) {
+                System.out.println("deine Versuchezahl ist " + Versuch);
+                break;
+            }
+        }
+        tnum.close();
+    }
+
+    public static String guess(int nummer) {
+        if (nummer == geheimnis) {
+            System.out.println("Deine Vermutung ist Richtig! Die Zahl ist " + geheimnis);
+            return "Erfolg";
+        } else if (nummer < geheimnis) {
+            System.out.println("Deine Zahl ist größer als die Zahl" + "\n" + "noch weiter");
+            return "Verloren";
+        } else {
+            System.out.println("Deine Zahl ist kleiner als die Zahl" + "\n" + "noch weiter");
+            return "Verloren";
+        }
+    }
+    // ich möchte Scanner class as method machen.
+    // public static int meineVermutung() {
+    // Scanner tnummer = new Scanner(System.in);
+    // int Vnummer = tnummer.nextInt();
+
+    // return Vnummer;
+    // }
+
+}
+
