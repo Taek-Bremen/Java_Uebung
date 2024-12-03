@@ -1,0 +1,80 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Main {
+
+    static Integer geheimnis = ThreadLocalRandom.current().nextInt(1, 100);;
+    static int Versuch = 0;
+    static JLabel text = new JLabel("Gebe eine Zahl zwischen 0 und 100");
+    static JTextField textField = new JTextField();//Textfield, um zu schreiben
+
+    public static void main(String[] args) throws Exception {
+        openUI(); //button spielt die Rolle als while(true)
+    }
+
+    public static void openUI() {
+        JFrame frame = new JFrame("Rate die Zahl!"); // Window Fenster
+        frame.setSize(400, 400);
+        frame.setLocation(500, 500);
+        frame.setDefaultCloseOperation((JFrame.EXIT_ON_CLOSE));
+        frame.setDefaultLookAndFeelDecorated(true);
+
+        text.setBounds(50, 50, 300, 30); // angezeigen
+        
+        textField.setBounds(50, 150, 200, 30);
+
+        JButton button1 = new JButton("Raten!");
+        JButton button2 = new JButton("Exit!");
+        button1.setBounds(50, 200, 100, 30);
+        button2.setBounds(150, 200, 100, 30);
+        
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String textFromTextfield = textField.getText();
+                    Integer number = Integer.parseInt((textFromTextfield));
+                    guess(number);
+
+                } catch (Exception error) {
+                    text.setText("Bitte gebe eine Zahl ein!");
+                    textField.setText("");
+                }
+            }
+        });
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+    
+
+        frame.add(text);
+        frame.add(textField);
+        frame.add(button1);
+        frame.add(button2);
+        frame.setLayout(null); //absoulte Layout
+        frame.setVisible(true);
+
+    }
+
+    
+    public static void guess(int nummer) {
+        if (nummer == geheimnis) {
+            text.setText("Richtig geraten mit " + Versuch + " Versuchen!");
+        } else {
+            Versuch ++;
+            if (nummer < geheimnis) {
+                text.setText("Deine Zahl ist größer als die Zahl" + "\n" + "noch weiter");
+            } else {
+                text.setText("Deine Zahl ist kleiner als die Zahl" + "\n" + "noch weiter");
+            }
+            textField.setText("");// reset = löschen den Text in textField
+        }
+    }
+}
+
