@@ -1,0 +1,8 @@
+class Example {  // => class
+	int instanceVariable; // instanceVariable
+    static int classVariable; // classVariable(static variable)
+    
+    void method() { // => method
+    	int localVariable = 0; // local variable
+    }
+}
